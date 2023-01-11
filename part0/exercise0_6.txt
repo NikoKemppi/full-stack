@@ -1,0 +1,14 @@
+note over browser:
+Fetch the form from the page and register an event handler.
+Prevent the default handling of form's submit.
+Create a new note and add it to the notes list.
+Rerender the list.
+Send the data as JSON string.
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server-->browser: a resource created (JavaScript-code)
+
+note over browser:
+Manipulate HTML-code's content with JavaScript in the browser.
+end note
