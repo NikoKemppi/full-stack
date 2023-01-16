@@ -32,14 +32,28 @@ const App = () => {
     setPoints(copy)
   }
 
+  const mostVote = () => {
+    let most = 0;
+    for (let a = 0; a < anecdotes.length; a++) {
+      if (points[a] > points[most]) {
+        most = a
+      }
+    }
+    return most
+  }
+
   const randomValue = () => { return Math.floor(Math.random() * anecdotes.length) }
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {points[selected]} votes</p>
       <Button handleClick={() => vote(selected)} text="vote" />
       <Button handleClick={() => setToRandom(randomValue())} text="next anecdote" />
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[mostVote()]}</p>
+      <p>has {points[mostVote()]} votes</p>
     </div>
   )
 }
