@@ -23,12 +23,12 @@ const Part = (props) => {
 }
 
 const Total = (props) => {
-  const exercisePoints = props.course.parts.map(part => part.exercises)
-  let sum = 0
-  exercisePoints.forEach(point => {sum += point})
+  const exercisesArray = props.course.parts.map(part => part.exercises)
+  const initialValue = 0
+  const total = exercisesArray.reduce((s, p) => s + p, initialValue)
   return (
     <b>
-      total of {sum} exercises
+      total of {total} exercises
     </b>
   )
 }
