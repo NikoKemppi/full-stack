@@ -19,7 +19,7 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
-  const [points, setPoints] = useState(new Uint8Array(anecdotes.length))
+  const [points, setPoints] = useState(new Uint32Array(anecdotes.length))
 
   const setToRandom = newValue => {
     console.log('selected now', newValue)
