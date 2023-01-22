@@ -21,9 +21,19 @@
       "id": 4
     },
     {
-      "name": "Aalto Herras",
-      "number": "123-456789",
+      "name": "Jaakko Pekkonen",
+      "number": "12-34-56789",
       "id": 5
+    },
+    {
+      "name": "Aalto Herras",
+      "number": "123-456456",
+      "id": 6
+    },
+    {
+      "name": "Mikael Nickleson",
+      "number": "00-00000-001",
+      "id": 7
     }
   ]
 }
