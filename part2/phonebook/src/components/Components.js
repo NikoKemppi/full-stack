@@ -22,15 +22,17 @@ const PersonForm = ({addName, newName, handleNameChange, newNumber, handleNumber
     )
 }
 
-const Name = ({person}) => {
+const Name = ({person, deletePerson}) => {
     return (
-      <p>{person.name} {person.number}</p>
+        <div>
+            {person.name} {person.number} <button onClick={deletePerson}>delete</button>
+        </div>
     )
 }
 
-const Persons = ({persons}) => {
+const Persons = ({persons, deletePerson}) => {
     return (
-        persons.map(person => <Name key={person.name} person={person}/>)
+        persons.map(person => <Name key={person.name} person={person} deletePerson={() => deletePerson(person.id)} />)
     )
 }
 

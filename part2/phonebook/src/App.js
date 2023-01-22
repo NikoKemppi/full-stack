@@ -30,13 +30,29 @@ const App = () => {
       const personObject = {
         name: newName,
         number: newNumber,
-        id: persons.length + 1
+        id: persons.length !== 0 ? persons[persons.length - 1].id + 1 : 1
       }
       personService.postPerson(personObject)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewPhoneNumber('')
+        })
+    }
+  }
+
+  const deletePerson = (id) => {
+    let personName = ""
+    for(let i = 0; i < persons.length; i++) {
+      if (persons[i].id === id) {
+        personName = persons[i].name;
+        break;
+      }
+    }
+    if (window.confirm(`Delete ${personName} ?`)) {
+      personService.deletePerson(id)
+        .then(returnedPerson => {
+          setPersons(persons.filter(person => person.id !== id))
         })
     }
   }
@@ -63,7 +79,7 @@ const App = () => {
       <h3>add a new</h3>
       <PersonForm addName={addName} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
       <h3>Numbers</h3>
-      <Persons persons={filteredPersons}/>
+      <Persons persons={filteredPersons} deletePerson={deletePerson}/>
     </div>
   )
 }
