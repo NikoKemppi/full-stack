@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {Filter, PersonForm, Persons} from './components/Components'
+import axios from 'axios'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -16,20 +17,25 @@ const App = () => {
     event.preventDefault()
     let sameNameDetected = false;
     for (let i = 0; i < persons.length; i++) {
-      if (persons[i].name == newName) {
+      if (persons[i].name === newName) {
         sameNameDetected = true;
         alert(`${newName} is already added to phonebook`);
       }
     }
+
     if (!sameNameDetected) {
       const personObject = {
         name: newName,
         number: newNumber,
         id: persons.length + 1
       }
-      setPersons(persons.concat(personObject))
-      setNewName('')
-      setNewPhoneNumber('')
+      axios
+        .post('http://localhost:3001/persons', personObject)
+        .then(response => {
+          setPersons(persons.concat(response.data))
+          setNewName('')
+          setNewPhoneNumber('')
+        })
     }
   }
 
