@@ -19,13 +19,13 @@ const App = () => {
   const addName = (event) => {
     event.preventDefault()
     let sameNameDetected = false;
+    let id = 0;
     for (let i = 0; i < persons.length; i++) {
       if (persons[i].name === newName) {
         sameNameDetected = true;
-        alert(`${newName} is already added to phonebook`);
+        id = persons[i].id;
       }
     }
-
     if (!sameNameDetected) {
       const personObject = {
         name: newName,
@@ -38,6 +38,17 @@ const App = () => {
           setNewName('')
           setNewPhoneNumber('')
         })
+    } else {
+      if (window.confirm(`${newName} is already added to the phonebook, replace the old number with a new one?`)) {
+        const person = persons.find(p => p.id === id)
+        const changedPerson = { ...person, number: newNumber }
+        personService.replaceNumber(id, changedPerson)
+          .then(returnedPerson => {
+            setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+            setNewName('')
+            setNewPhoneNumber('')
+          })
+      }
     }
   }
 
