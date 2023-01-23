@@ -3,12 +3,19 @@ import '../index.css'
 const Notification = ({message}) => {
     if (message === null) {
         return null
-    }
-    return (
-        <div className='message'>
-            {message}
-        </div>
-    ) 
+    } if (message.includes("has already been removed from the server")) {
+        return (
+            <div className='error'>
+                {message}
+            </div>
+        )
+    } else {
+        return (
+            <div className='message'>
+                {message}
+            </div>
+        )
+    } 
 }
 
 const Filter = ({newFilter, handleFilterChange}) => {

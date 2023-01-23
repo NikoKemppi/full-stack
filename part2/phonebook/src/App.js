@@ -46,16 +46,24 @@ const App = () => {
     } else {
       if (window.confirm(`${newName} is already added to the phonebook, replace the old number with a new one?`)) {
         const person = persons.find(p => p.id === id)
+        console.log(person)
         const changedPerson = { ...person, number: newNumber }
         personService.replaceNumber(id, changedPerson)
           .then(returnedPerson => {
             setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
-            setNewName('')
-            setNewPhoneNumber('')
             setNotification(`Changed phone number to ${newNumber}`)
             setTimeout(() => {
               setNotification(null)
             }, 5000)
+            setNewName('')
+            setNewPhoneNumber('')
+          })
+          .catch(error => {
+            setNotification(`Information of ${newName} has already been removed from the server`)
+            setTimeout(() => {
+              setNotification(null)
+            }, 5000)
+            setPersons(persons.filter(p => p.id !== id))
           })
       }
     }
