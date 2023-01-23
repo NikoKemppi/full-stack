@@ -1,3 +1,16 @@
+import '../index.css'
+
+const Notification = ({message}) => {
+    if (message === null) {
+        return null
+    }
+    return (
+        <div className='message'>
+            {message}
+        </div>
+    ) 
+}
+
 const Filter = ({newFilter, handleFilterChange}) => {
     return (
       <form>
@@ -36,4 +49,4 @@ const Persons = ({persons, deletePerson}) => {
     )
 }
 
-export {Filter, PersonForm, Persons}
+export {Notification, Filter, PersonForm, Persons}

@@ -24,6 +24,21 @@
       "name": "Aalto Herras",
       "number": "999-123456",
       "id": 5
+    },
+    {
+      "name": "Maria Poppiainen",
+      "number": "12-98-33445",
+      "id": 6
+    },
+    {
+      "name": "Homer Simpsons",
+      "number": "11111111111",
+      "id": 7
+    },
+    {
+      "name": "Ned Flanders",
+      "number": "00-0000711",
+      "id": 8
     }
   ]
 }

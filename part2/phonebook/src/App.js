@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {Filter, PersonForm, Persons} from './components/Components'
+import {Notification, Filter, PersonForm, Persons} from './components/Components'
 import personService from './components/Communication'
 
 const App = () => {
@@ -7,6 +7,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewPhoneNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     personService
@@ -37,6 +38,10 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewPhoneNumber('')
+          setNotification(`Added ${newName}`)
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000)
         })
     } else {
       if (window.confirm(`${newName} is already added to the phonebook, replace the old number with a new one?`)) {
@@ -47,6 +52,10 @@ const App = () => {
             setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
             setNewName('')
             setNewPhoneNumber('')
+            setNotification(`Changed phone number to ${newNumber}`)
+            setTimeout(() => {
+              setNotification(null)
+            }, 5000)
           })
       }
     }
@@ -86,6 +95,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification}/>
       <Filter newFilter={newFilter} handleFilterChange={handleFilterChange}/>
       <h3>add a new</h3>
       <PersonForm addName={addName} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
