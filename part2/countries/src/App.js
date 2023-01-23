@@ -29,16 +29,15 @@ const Country = ({country}) => {
   )
 }
 
-const CountryName = ({country}) => {
-  
+const CountryName = ({country, selectCountry}) => {
   return (
     <div>
-      {country.name.common}
+      {country.name.common} <button onClick={selectCountry}>show</button>
     </div>
   )
 }
 
-const Countries = ({countries}) => {
+const Countries = ({countries, setNewFinder}) => {
   if (countries.length > 10) {
     return (
       <div>
@@ -51,7 +50,9 @@ const Countries = ({countries}) => {
     )
   } else {
     return (
-      countries.map(country => <CountryName key={country.name.common} country={country} />)
+      countries.map(country => 
+        <CountryName key={country.name.common} country={country} selectCountry={() => setNewFinder(country.name.common)}/>
+      )
     )
   }
 }
@@ -81,7 +82,7 @@ const App = () => {
   return (
     <div>
       <Finder newFinder={newFinder} handleFinderChange={handleFinderChange}/>
-      <Countries countries={filteredCountries}/>
+      <Countries countries={filteredCountries} setNewFinder={setNewFinder}/>
     </div>
   )
 }
