@@ -30,7 +30,7 @@ const Finder = ({newFinder, handleFinderChange}) => {
 }
 
 const Weather = ({country}) => {
-  const [weatherData, setWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
     console.log("starting useEffect")
@@ -42,8 +42,7 @@ const Weather = ({country}) => {
       })
     })}, [country])
   
-  console.log("weatherData:", JSON.stringify(weatherData))
-  if (JSON.stringify(weatherData) === '{}') {
+  if (weatherData === null) {
     console.log("now loading")
     return (
       <div>
@@ -113,7 +112,7 @@ const Countries = ({countries, setNewFinder}) => {
 }
 
 const App = () => {
-  const [countries, setCountries] = useState([]) 
+  const [countries, setCountries] = useState(null) 
   const [newFinder, setNewFinder] = useState('')
 
   useEffect(() => {
@@ -123,6 +122,14 @@ const App = () => {
     })
   }, [])
 
+  if (countries === null) {
+    return (
+      <div>
+        <p>Loading countries...</p>
+      </div>
+    )
+  }
+  
   const handleFinderChange = (event) => {
     console.log(event.target.value)
     setNewFinder(event.target.value)
